@@ -1,0 +1,6 @@
+Django
+Pillow
+django-filter
+django-import-export
+djangorestframework
+gunicorn

@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <link rel="stylesheet" href="{% static 'css/knacss.css' %}" />
+      <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+      <title>{% block title %}{% endblock %} WiFiScout</title>
+      {% block meta %}{% endblock %}
+  </head>
+<body>
+  <header id="header" role="banner" class="pas">
+  {% block header %}
+    <h1 class="inline">WiFiScout</h1>
+    <div class="float-right">
+      {% if request.user.is_authenticated %}
+      Logged in as <a href="{% url 'accounts_profile' %}">{{ request.user.username }}</a>
+      - <a href="{% url 'auth_logout' %}">Log out</a>
+      {% else %}
+       <a href="{% url 'auth_login' %}">Log in</a>
+       - <a href="{% url 'accounts_signup' %}">Sign up</a>
+       {% endif %}
+    </div>
+  {% endblock %}
+  </header>
+
+  <div class="flex-container">
+    {% block menu %}
+    <aside class="mod w20 pam aside">
+      <nav id="navigation" role="navigation">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </nav>
+    </aside>
+    {% endblock %}
+
+    <main id="main" role="main" class="flex-item-fluid pam">
+    {% block content %}{% endblock %}
+    </main>
+  </div>
+
+  <footer id="footer" role="contentinfo" class="pam">
+  {% block footer %}
+    <p>2017</p>
+  {% endblock %}
+  </footer>
+</body>
+</html>

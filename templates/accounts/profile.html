@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile -{% endblock %}
+{% block content %}
+  <h2>Profile</h2>
+
+  <ul>
+    <li>Username: {{ user.username }}</li>
+    <li>Your API key: {{ api_key }}</li>
+  </ul>
+{% endblock %}
