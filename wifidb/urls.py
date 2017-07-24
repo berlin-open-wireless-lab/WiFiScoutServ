@@ -20,7 +20,7 @@ router.register(r'device', DeviceViewSet, 'devices')
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/v1/', include(router.urls)),
-    url(r'', include(accounts.urls))
+    url(r'^accounts/', include(accounts.urls))
 ]
 
 if DEBUG:
