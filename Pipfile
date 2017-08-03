@@ -2,15 +2,16 @@
 url = "https://pypi.python.org/simple"
 verify_ssl = true
 
-[packages]
-djangorestframework = "*"
-django-filter = "*"
-django-import-export = "*"
-Django = "*"
-Pillow = "*"
-
 [dev-packages]
 pytest = "*"
 pytest-cov = "*"
 pytest-django = "*"
 pipenv-package-requirements = "*"
+
+[packages]
+djangorestframework = "*"
+django-filter = "*"
+django-import-export = "*"
+gunicorn = "*"
+Django = "*"
+Pillow = "*"
