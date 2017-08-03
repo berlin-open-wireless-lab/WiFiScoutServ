@@ -17,4 +17,5 @@ htmlcov/
 manuf
 .cache/
 .coverage
-static/
+static/admin
+static/rest_framework

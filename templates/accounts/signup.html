@@ -2,11 +2,23 @@
 
 {% block title %}Sign up -{% endblock %}
 {% block content %}
-  <h2>Sign up</h2>
+  <h1>Sign up</h1>
 
   <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Sign up</button>
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" class="form-control" name="username" required placeholder="Enter username" value="">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" class="form-control" name="password1" required placeholder="Enter password" value="" type="password">
+        <input class="form-control" name="password2" required placeholder="Confirm password" value="" type="password">
+        <small id="passwordHelp" class="form-text text-muted">Your password must contain at least 8 characters and can't be entirely numeric.</small>
+      </div>
+
+      <input type="submit" class="btn btn-primary" value="Sign up" />
+    </div>
   </form>
 {% endblock %}

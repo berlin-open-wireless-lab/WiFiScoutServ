@@ -2,14 +2,25 @@
 
 {% block title %}Log in -{% endblock %}
 {% block content %}
-  <h2>Log in</h2>
+  <h1>Log in</h1>
+
+  <p>Don't have an account yet? You can  <a href="{% url 'accounts_signup' %}">sign up here</a>.</p>
 
   <form method="post" action="">
     {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Log in" />
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input id="username" class="form-control" name="username" required placeholder="Enter username" value="">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input id="password" class="form-control" name="password" required placeholder="Enter password" value="" type="password">
+    </div>
+
+    <input type="submit" class="btn btn-primary" value="Log in" />
     <input type="hidden" name="next" value="{{ next }}" />
   </form>
 
-  <a href="{% url 'accounts_signup' %}">Sign up</a>
 {% endblock %}
