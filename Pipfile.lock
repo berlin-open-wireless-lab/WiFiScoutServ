@@ -12,21 +12,13 @@
         ]
     },
     "default": {
-        "Django": {
-            "hash": "sha256:6fd30e05dc9af265f7d7d10cfb0efa013e6236db0853c9f47c74c585587c5a57",
-            "version": "==1.11.4"
-        },
-        "Pillow": {
-            "hash": "sha256:4757ad2eee627dca861289291512e66292ce535c2bc79210321c440381cf0901",
-            "version": "==4.2.1"
-        },
-        "PyYAML": {
-            "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
-            "version": "==3.12"
-        },
         "diff-match-patch": {
             "hash": "sha256:9dba5611fbf27893347349fd51cc1911cb403682a7163373adacc565d11e2e4c",
             "version": "==20121119"
+        },
+        "django": {
+            "hash": "sha256:6fd30e05dc9af265f7d7d10cfb0efa013e6236db0853c9f47c74c585587c5a57",
+            "version": "==1.11.4"
         },
         "django-filter": {
             "hash": "sha256:6ef1611aeacfda8f13a075a992ff65687afbd5cc8fcb0f3f1563a9ad4fe2d1b0",
@@ -40,7 +32,7 @@
             "hash": "sha256:bb9d55997a71fb1c844cd84c15cbe2e87d2ec8493a685f96aa3db403760626b7",
             "version": "==3.6.3"
         },
-        "et_xmlfile": {
+        "et-xmlfile": {
             "hash": "sha256:614d9722d572f6246302c4491846d2c393c199cfa4edc9af593437691683335b",
             "version": "==1.0.1"
         },
@@ -64,9 +56,17 @@
             "hash": "sha256:ee7551efb70648fa8ee569c2b6a6dbbeff390cc94b321da5d508a573b90a4f17",
             "version": "==2.4.8"
         },
+        "pillow": {
+            "hash": "sha256:4757ad2eee627dca861289291512e66292ce535c2bc79210321c440381cf0901",
+            "version": "==4.2.1"
+        },
         "pytz": {
             "hash": "sha256:d1d6729c85acea5423671382868627129432fba9a89ecbb248d8d1c7a9f01c67",
             "version": "==2017.2"
+        },
+        "pyyaml": {
+            "hash": "sha256:592766c6303207a20efc445587778322d7f73b161bd994f227adaa341ba212ab",
+            "version": "==3.12"
         },
         "tablib": {
             "hash": "sha256:27aafe2bf6573472f4ab330b2e46e9ebf01942a204bfaee784191848411afe05",
