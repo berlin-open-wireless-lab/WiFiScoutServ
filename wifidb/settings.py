@@ -153,3 +153,5 @@ REST_FRAMEWORK = {
 ADMIN_NAME = "WiFiScout Administration"
 AUTH_API_KEY_PARAM = 'key'
 OUI_FILE = 'manuf'
+JSON_DB_PATH = '../WiFiSCORE/'
+JSON_DB_FILE_NAME = 'device.json'
