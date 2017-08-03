@@ -1,6 +1,5 @@
-from uuid import UUID
-
 from rest_framework import serializers
+
 from devices.models import Category, Device
 
 
@@ -10,7 +9,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
-        fields = '__all__'
+        fields = ('id', 'name', 'parent')
 
     def get_parent(self, obj):
         if obj.parent is not None:
@@ -20,8 +19,7 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class DeviceSerializer(serializers.HyperlinkedModelSerializer):
-    # categories = serializers.SerializerMethodField()
-    categories = CategorySerializer(read_only=True)
+    categories = serializers.SerializerMethodField()
     category = serializers.IntegerField(write_only=True)
     uuid = serializers.UUIDField()
     created_at = serializers.DateTimeField()
@@ -31,8 +29,8 @@ class DeviceSerializer(serializers.HyperlinkedModelSerializer):
         model = Device
         fields = ('uuid', 'name', 'categories', 'category', 'wifi_signature', 'mac_vendor', 'created_at', 'modified_at', 'image_url')
 
-    # def get_categories(self, obj):
-    #     return obj.get_categories()
+    def get_categories(self, obj):
+        return obj.get_categories()
 
     def create(self, validated_data):
         cat = validated_data.get('category')
@@ -51,7 +49,8 @@ class DeviceSerializer(serializers.HyperlinkedModelSerializer):
                                      created_at=created_at,
                                      mac_vendor=mac_vendor,
                                      modified_at=modified_at,
-                                     image_url=image_url)
+                                     image_url=image_url,
+                                     approved=True)
 
     def update(self, instance, validated_data):
         cat = validated_data.get('category')
