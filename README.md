@@ -160,6 +160,5 @@ You can register at http://localhost:8000/accounts/signup/ and you will be provi
 
 - Device list: http://localhost:8000/api/v1/device?key= `<API_KEY>`
 - Device details:
-    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&id=`<ID>`
     - http://localhost:8000/api/v1/device?key= `<API_KEY>`&signature=`<SIGNATURE>`
-    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&signature=`<SIGNATURE>`&oui=`<MAC VENDOR>`
+    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&signature=`<SIGNATURE>`&oui=`<MAC_VENDOR>`
