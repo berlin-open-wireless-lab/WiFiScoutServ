@@ -2,6 +2,8 @@ body{padding-top:50px;}
 
 main h1{margin-bottom:20px;padding-bottom:9px;border-bottom:1px solid #eee;}
 
+.navbar .navbar-brand{font-size:1.3em;}
+
 /*
  * Sidebar
  */

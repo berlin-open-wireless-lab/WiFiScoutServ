@@ -8,6 +8,10 @@ main h1 {
   border-bottom: 1px solid #eee;
 }
 
+.navbar .navbar-brand {
+  font-size: 1.3em;
+}
+
 /*
  * Sidebar
  */
