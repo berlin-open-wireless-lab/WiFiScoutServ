@@ -4,11 +4,15 @@
 
 The API backend.
 
+A demo is available at https://wifiscout.pcksr.net/
+
 You will also need the following:
 - WiFiSCORE (JSON device database): https://github.com/berlin-open-wireless-lab/WiFiSCORE/
 - WiFiDePict (picture database): https://github.com/berlin-open-wireless-lab/WiFiDePict/
 
 ## Manual installation
+
+These instructions are suitable to test the application with Django built-in development server in debug mode.
 
 ### Python dependencies
 
@@ -30,15 +34,25 @@ MEDIA_ROOT = '../WiFiDePict'
 
 You also need a wireshark OUI database file for OUI lookups. The last version is available at https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf;hb=HEAD
 
-Then add its path in your `settings.py`:
+Then add its path in your `wifidb/settings.py`:
 
 ```
 OUI_FILE=manuf
 ```
 
+### Other settings
+
+```
+ADMIN_NAME = "WiFiScout Administration" # The name displayed on the admin interface
+AUTH_API_KEY_PARAM = 'key' # The name of the GET parameter for the API key
+JSON_DB_PATH = '../WiFiSCORE/' # The path to the JSON database
+JSON_DB_FILE_NAME = 'device.json' # The name of device JSON files
+```
+
 ### Django Setup
 
 ```
+python manage.py collectstatic
 python manage.py migrate
 python manage.py createsuperuser
 python dbtool.py --todb <PATH_TO_JSON_DATABASE>
@@ -48,18 +62,104 @@ python dbtool.py --todb <PATH_TO_JSON_DATABASE>
 
 `python manage.py runserver 0.0.0.0:8000`
 
+## Production
+
+**WARNING:** currently not suitable for production use!
+
+### Environment variables
+
+You will need the following environment variables:
+
+- `DJANGO_SECRET_KEY=<SECRET KEY>` the secret key used by Django
+- `DJANGO_DEBUG=''` set this variable to anything so that the application run in production mode
+- `DJANGO_SETTINGS_MODULE=wifidb.settings`
+
+You can write them in a `.env` file and then `source` it.
+
+To generate a secret key, I use the following Python one-liner:
+
+```
+python -c "import string,random; uni=string.ascii_letters+string.digits+string.punctuation; print repr(''.join([random.SystemRandom().choice(uni) for i in range(random.randint(60,65))]))"
+```
+
+### Gunicorn
+
+(`<APP_PATH>` is the path to the root directory)
+
+Gunicorn is a Python WSGI HTTP Server used to serve the Django application.
+
+```
+gunicorn --workers 3 --bind unix:<APP_PATH>/wifidb.sock
+```
+
+To run gunicorn as a daemon service, I use the following systemd unit file:
+
+`/etc/systemd/service/gunicorn.service:`
+```
+[Unit]
+Description=gunicorn daemon
+After=network.target
+After=nginx.service
+
+[Service]
+EnvironmentFile=-<APP_PATH>/.env
+User=wifiscout
+Group=wifiscout
+WorkingDirectory=<APP_PATH>
+ExecStart=/usr/bin/gunicorn --workers 3 --bind unix:<APP_PATH>/wifidb.sock wifidb.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Then:
+```
+systemctl start gunicorn
+systemctl status gunicorn
+```
+
+If everything's OK:
+```
+systemctl enable gunicorn
+```
+
+### Reverse proxy and static files
+
+The following instructions are suitable for using nginx as a reverse proxy.
+
+```
+location / {
+    proxy_pass         http://unix:<APP_PATH>/wifidb.sock;
+    proxy_redirect     off;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header   X-Forwarded-Host $server_name;
+}
+
+location /pictures/ {
+        alias <PATH_TO_PICTURES_FOLDER>;
+        autoindex off;
+}
+
+location /static/ {
+        alias <APP_PATH>/static/;
+        autoindex off;
+}
+```
+
 ## Installation using Docker
 
-**Note:** isn't ready yet. Database is in the container, so it's lost if you stop it.
+**Note:** isn't ready yet. The Dockerfile is broken.
 
 A Dockerfile is provided.
 
 ## Usage
 
-You can register at http://localhost:8000/signup and you will be provided with an API key.
+You can register at http://localhost:8000/accounts/signup/ and you will be provided with an API key.
 
 - Device list: http://localhost:8000/api/v1/device?key= `<API_KEY>`
 - Device details:
     - http://localhost:8000/api/v1/device?key= `<API_KEY>`&id=`<ID>`
-    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&sign=`<SIGNATURE>`
-    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&sign=`<SIGNATURE>`&oui=`<MAC VENDOR>`
+    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&signature=`<SIGNATURE>`
+    - http://localhost:8000/api/v1/device?key= `<API_KEY>`&signature=`<SIGNATURE>`&oui=`<MAC VENDOR>`
