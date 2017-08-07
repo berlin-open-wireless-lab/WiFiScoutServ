@@ -52,7 +52,6 @@ JSON_DB_FILE_NAME = 'device.json' # The name of device JSON files
 ### Django Setup
 
 ```
-python manage.py collectstatic
 python manage.py migrate
 python manage.py createsuperuser
 python dbtool.py --todb <PATH_TO_JSON_DATABASE>
@@ -124,6 +123,10 @@ systemctl enable gunicorn
 ```
 
 ### Reverse proxy and static files
+
+```
+python manage.py collectstatic
+```
 
 The following instructions are suitable for using nginx as a reverse proxy.
 
