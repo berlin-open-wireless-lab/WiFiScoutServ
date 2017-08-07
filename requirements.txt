@@ -2,5 +2,6 @@ Django
 Pillow
 django-filter
 django-import-export
+django-simple-captcha
 djangorestframework
 gunicorn
