@@ -9,6 +9,7 @@ django-import-export = "*"
 gunicorn = "*"
 Django = "*"
 Pillow = "*"
+django-simple-captcha = "*"
 
 [dev-packages]
 pytest = "*"
