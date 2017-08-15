@@ -1,21 +1,21 @@
 FROM python:3
 
-MAINTAINER Nothyp <nothyp@pcksr.net>
+LABEL maintainer="Pierre Kuhner <pierre@pcksr.net>"
 
-ENV PYTHONUNBUFFERED=1
-ENV DJANGO_DEBUG=''
-ENV DJANGO_SETTINGS_MODULE=wifidb.settings
+RUN pip install -U pip
+
+ENV PYTHONUNBUFFERED=1 \
+    DJANGO_DEBUG='' \
+    DJANGO_SETTINGS_MODULE=wifidb.settings
 
 RUN mkdir /app
-
-COPY . /app
-
 WORKDIR /app
+COPY . /app/
 
-RUN chmod +x start.sh
-RUN pip install -r requirements.txt
-RUN python manage.py migrate
+RUN pip install -Ur requirements.txt
+RUN curl -o manuf https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf;hb=HEAD
 
 EXPOSE 8000
 
-CMD ["sh", "start.sh"]
+RUN chmod +x start.sh
+CMD ["/app/start.sh"]
