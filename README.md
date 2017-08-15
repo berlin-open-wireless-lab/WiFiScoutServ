@@ -153,9 +153,12 @@ location /static/ {
 
 ## Installation using Docker
 
-**Note:** isn't ready yet. The Dockerfile is broken.
+A `Dockerfile` is provided.
+An automated build is available at https://hub.docker.com/r/pkuhner/wifiscoutserv/
 
-A Dockerfile is provided.
+### Local development using docker-compose
+
+A `docker-compose.yml` file is provided.
 
 ## Usage
 
