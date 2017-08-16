@@ -2,7 +2,7 @@
 
 **WARNING:** currently not suitable for production use!
 
-The API backend.
+The API backend for https://github.com/berlin-open-wireless-lab/WiFiSCORE .
 
 A demo is available at https://wifiscout.pcksr.net/
 
