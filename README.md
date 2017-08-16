@@ -156,6 +156,18 @@ location /static/ {
 A `Dockerfile` is provided.
 An automated build is available at https://hub.docker.com/r/pkuhner/wifiscoutserv/
 
+You need to provide volumes for the database and static files, for instance:
+
+```
+docker run -v <ABSOLUTE_PATH_TO_WIFISCOUTSERV>/db:/app/db:Z -v <ABSOLUTE_PATH_TO_WIFISCOUTSERV>/static:/app/static:Z -it -p 8000:8000 --name=wifiscoutserv -d pkuhner/wifiscoutserv
+```
+
+Then, configure your reverse proxy to point to the container. For instance with Nginx:
+
+```
+proxy_pass         http://localhost:8000;
+```
+
 ### Local development using docker-compose
 
 A `docker-compose.yml` file is provided.
