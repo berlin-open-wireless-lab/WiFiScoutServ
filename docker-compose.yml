@@ -15,11 +15,10 @@ services:
   web:
     build: .
     container_name: wifiscout-gunicorn
-    dns: 8.8.8.8
     volumes:
       - ./db:/app/db:Z
       - ./static:/app/static:z
-      - ../WiFiSCORE:/WiFiSCORE:Z
+      - ../WiFiSCORE:/WiFiSCORE:z
       - ../WiFiDePict:/WiFiDePict:z
     expose:
       - "8000"
