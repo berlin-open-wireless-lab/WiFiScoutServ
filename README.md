@@ -156,11 +156,19 @@ location /static/ {
 A `Dockerfile` is provided.
 An automated build is available at https://hub.docker.com/r/pkuhner/wifiscoutserv/
 
-You need to provide volumes for the database and static files, for instance:
+As the process inside Docker does not run as root and still need 
+to have read/write permissions on host folders, you need to pass
+the ID of your user when running docker run, see below for an example. 
+
+Also, you need to mount the staticfiles, pictures and JSON database folders.
+
+Run the container using the following command:
 
 ```
-docker run -v <ABSOLUTE_PATH_TO_WIFISCOUTSERV>/db:/app/db:Z -v <ABSOLUTE_PATH_TO_WIFISCOUTSERV>/static:/app/static:Z -it -p 8000:8000 --name=wifiscoutserv -d pkuhner/wifiscoutserv
+docker run -e LOCAL_USER_ID=`id -u $USER` -v <ABSOLUTE_PATH_TO_WIFISCOUTSERV>/db:/app/db:Z -v <ABSOLUTE_PATH_TO_WIFISCOUTSERV>/static:/app/static:Z -v <PATH_TO_WiFiDePict>:/WiFiDePict:z -v <PATH_TO_WiFiSCORE>:/WiFiSCORE:z  -it -p 8000:8000 --name=wifiscoutserv -d pkuhner/wifiscoutserv
 ```
+
+This also assumes that your WiFiSCORE and WiFiDePict folders are readable/writable by www-data.
 
 Then, configure your reverse proxy to point to the container. For instance with Nginx:
 
