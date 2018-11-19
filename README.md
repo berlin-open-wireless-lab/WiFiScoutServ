@@ -179,6 +179,9 @@ proxy_pass         http://localhost:8000;
 ### Local development using docker-compose
 
 A `docker-compose.yml` file is provided.
+To start local version use
+
+    docker-compose up --build
 
 ## Usage
 
