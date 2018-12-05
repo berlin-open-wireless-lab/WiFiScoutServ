@@ -1,4 +1,4 @@
-Django==1.11
+Django==1.11.17
 Pillow==4.2.1
 django-filter==3.6.3
 django-import-export==1.0.4
