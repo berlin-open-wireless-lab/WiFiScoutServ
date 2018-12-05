@@ -1,7 +1,7 @@
-Django
-Pillow
-django-filter
-django-import-export
-django-simple-captcha
-djangorestframework
-gunicorn
+Django==1.11
+Pillow==4.2.1
+django-filter==3.6.3
+django-import-export==1.0.4
+django-simple-captcha==0.5.1
+djangorestframework==0.5.5
+gunicorn==19.7.1
