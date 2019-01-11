@@ -2,7 +2,8 @@
 """
 
 from django.conf import settings
-from django.conf.urls import include, url
+from django.conf.urls import url
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
@@ -19,7 +20,7 @@ router = routers.DefaultRouter()
 router.register(r'device', DeviceViewSet, 'devices')
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    path('admin/', admin.site.urls),
     url(r'^api/v1/', include(router.urls)),
     url(r'^captcha/', include('captcha.urls')),
     url(r'^accounts/', include(accounts.urls)),

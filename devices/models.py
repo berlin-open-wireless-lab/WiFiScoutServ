@@ -17,7 +17,7 @@ def device_directory_path(instance, filename):
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
-    parent = models.ForeignKey('self', blank=True, null=True, related_name='child')
+    parent = models.ForeignKey('self', blank=True, null=True, related_name='child', on_delete=models.PROTECT)
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -33,7 +33,7 @@ class Device(models.Model):
     modified_at = models.DateTimeField()
     wifi_signature = models.CharField(max_length=1000)
     mac_vendor = models.CharField(max_length=255)
-    category = models.ForeignKey(Category, null=True)
+    category = models.ForeignKey(Category, null=True, on_delete=models.PROTECT)
     comment = models.CharField(max_length=500, blank=True, default='')
     image = models.ImageField(upload_to=device_directory_path, blank=True, null=True)
     image_url = models.CharField(max_length=250, blank=True, default='')
