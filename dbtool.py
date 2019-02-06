@@ -82,13 +82,13 @@ def clean_device(device):
 def create_device(device):
     serializer = DeviceSerializer(data=device)
     if serializer.is_valid():
-        print(serializer.save())
+        print(serializer.save(signature_24=device['signature_24'],signature_5=device['signature_5']))
 
 
 def update_device(instance, device):
     serializer = DeviceSerializer(instance, data=device)
     if serializer.is_valid():
-        print(serializer.save())
+        print(serializer.save(signature_24=device['signature_24'],signature_5=device['signature_5']))
 
 
 def handler_tojson(json_path):

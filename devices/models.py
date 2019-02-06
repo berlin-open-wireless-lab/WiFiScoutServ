@@ -25,13 +25,22 @@ class Category(models.Model):
     def __str__(self):
         return "{0}".format(self.name)
 
+class Signature(models.Model):
+    wifi_signature = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ['-wifi_signature']
+
+    def __str__(self):
+        return "{0}".format(self.wifi_signature)
 
 class Device(models.Model):
     uuid = models.UUIDField(editable=False, default=uuid.uuid4)
     name = models.CharField(max_length=255)
     created_at = models.DateTimeField()
     modified_at = models.DateTimeField()
-    wifi_signature = models.CharField(max_length=1000)
+    signature_24 = models.ManyToManyField('Signature', related_name='%(class)s_signature_24')
+    signature_5 = models.ManyToManyField('Signature', related_name='%(class)s_signature_5')
     mac_vendor = models.CharField(max_length=255)
     category = models.ForeignKey(Category, null=True, on_delete=models.PROTECT)
     comment = models.CharField(max_length=500, blank=True, default='')

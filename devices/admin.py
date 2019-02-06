@@ -4,8 +4,7 @@ import os
 from django.conf import settings
 from django.contrib import admin
 
-from devices.models import Category, Device
-from devices.forms import DeviceForm
+from devices.models import Category, Device, Signature
 from devices.serializers import DeviceSerializer
 
 
@@ -13,11 +12,14 @@ from devices.serializers import DeviceSerializer
 class CategoryAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(Signature)
+class SignatureAdmin(admin.ModelAdmin):
+    pass
 
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
-    form = DeviceForm
-    fields = ('uuid', 'name', 'thumbnail', 'category', 'wifi_signature', 'mac_vendor', 'comment', 'created_at', 'modified_at', 'image', 'image_url')
+    filter_horizontal = ('signature_24','signature_5',)
+    fields = ('uuid', 'name', 'thumbnail', 'category', 'mac_vendor', 'comment', 'created_at', 'modified_at', 'image', 'image_url','signature_24','signature_5',)
     list_display = ('approved', 'thumbnail', 'name', 'mac_vendor', 'category', 'created_at', 'modified_at', 'comment')
     list_display_links = ('name',)
     list_filter = ('approved', 'category')
