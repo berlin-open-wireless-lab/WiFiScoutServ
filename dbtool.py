@@ -82,13 +82,27 @@ def clean_device(device):
 def create_device(device):
     serializer = DeviceSerializer(data=device)
     if serializer.is_valid():
-        print(serializer.save(signature_24=device['signature_24'],signature_5=device['signature_5']))
+        if 'signature_24' in device and 'signature_5' in device:
+            print(serializer.save(signature_24=device['signature_24'],signature_5=device['signature_5']))
+        elif 'signature_24' in device:
+            print(serializer.save(signature_24=device['signature_24']))
+        elif 'signature_5' in device:
+            print(serializer.save(signature_5=device['signature_5']))
+        else:
+            print(serializer.save())
 
 
 def update_device(instance, device):
     serializer = DeviceSerializer(instance, data=device)
     if serializer.is_valid():
-        print(serializer.save(signature_24=device['signature_24'],signature_5=device['signature_5']))
+        if 'signature_24' in device and 'signature_5' in device:
+            print(serializer.save(signature_24=device['signature_24'],signature_5=device['signature_5']))
+        elif 'signature_24' in device:
+            print(serializer.save(signature_24=device['signature_24']))
+        elif 'signature_5' in device:
+            print(serializer.save(signature_5=device['signature_5']))
+        else:
+            print(serializer.save())
 
 
 def handler_tojson(json_path):
