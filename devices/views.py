@@ -3,8 +3,10 @@ from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.exceptions import NotFound
 
-from devices.models import Category, Device
+from devices.models import Category, Device, Signature
 from devices.serializers import CategorySerializer, DeviceSerializer
+
+from django.db.models import Q
 
 try:
     from wifidb.settings import OUI_FILE
@@ -47,7 +49,8 @@ class DeviceViewSet(viewsets.ModelViewSet):
             cat_ids = get_category_children_ids(parent, cat_ids)
             queryset = queryset.filter(category__id__in=cat_ids)
         elif signature is not None:
-            queryset = queryset.filter(wifi_signature=signature)
+            ex_sig = get_object_or_404(Signature.objects, wifi_signature=signature)
+            queryset = queryset.filter(Q(signature_24=ex_sig) | Q(signature_5=ex_sig))
 
             if OUI_FILE:
                 if oui is not None:
