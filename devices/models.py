@@ -46,7 +46,7 @@ class Device(models.Model):
     category = models.ForeignKey(Category, null=True, on_delete=models.PROTECT)
     comment = models.CharField(max_length=500, blank=True, default='')
     image = models.ImageField(upload_to=device_directory_path, blank=True, null=True, max_length=500)
-    image_url = models.CharField(max_length=250, blank=True, default='')
+    image_url = models.CharField(max_length=500, blank=True, default='')
     approved = models.BooleanField(default=False)
 
     def __str__(self):
