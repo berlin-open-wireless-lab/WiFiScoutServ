@@ -12,7 +12,8 @@ def device_directory_path(instance, filename):
     content = instance.image.read()
     hash = sha256(content).hexdigest()
     fname, ext = fname, ext = os.path.splitext(filename)
-    return '{0}/{1}{2}'.format(str(instance.uuid).replace('-', ''), hash, ext)
+    instance.image_url = '{0}/{1}{2}'.format(str(instance.uuid).replace('-', ''), hash, ext)
+    return instance.image_url
 
 
 class Category(models.Model):
@@ -44,7 +45,7 @@ class Device(models.Model):
     mac_vendor = models.CharField(max_length=255)
     category = models.ForeignKey(Category, null=True, on_delete=models.PROTECT)
     comment = models.CharField(max_length=500, blank=True, default='')
-    image = models.ImageField(upload_to=device_directory_path, blank=True, null=True)
+    image = models.ImageField(upload_to=device_directory_path, blank=True, null=True, max_length=500)
     image_url = models.CharField(max_length=250, blank=True, default='')
     approved = models.BooleanField(default=False)
 
