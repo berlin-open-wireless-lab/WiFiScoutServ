@@ -27,7 +27,7 @@ class Category(models.Model):
         return "{0}".format(self.name)
 
 class Signature(models.Model):
-    wifi_signature = models.CharField(max_length=255)
+    wifi_signature = models.CharField(max_length=255, unique=True)
 
     class Meta:
         ordering = ['-wifi_signature']
