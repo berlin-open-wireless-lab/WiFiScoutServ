@@ -26,6 +26,8 @@ urlpatterns = [
     url(r'^accounts/', include(accounts.urls)),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
     url(r'^about[/]$', TemplateView.as_view(template_name="about.html")),
+    url(r'^howto[/]$', TemplateView.as_view(template_name="howto.html")),
+    url(r'^api[/]$', TemplateView.as_view(template_name="api.html")),
 ]
 
 if DEBUG:
