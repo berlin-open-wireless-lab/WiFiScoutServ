@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}HowTo{% endblock %}
+{% block content %}
+<h1>WiFi Signature Server</h1>
+
+<h3>How can I add my device?</h3>
+<p>There are two ways:</p>
+<ol>
+  <li>Add device.json to WiFi <a href="https://github.com/berlin-open-wireless-lab/WiFiSCORE">Signature Communitry Repository.</a></li>
+  <li>Ask for maintainer account.</li>
+</ol>
+
+<h3>Where can I find my WiFi Signature?</h3>
+<p>You need OpenWrt with full wpad installation.</p>
+<p>In the shell you can use</p>
+<p><code>ubus call hostapd.[INTERFACE] get_clients</code>
+<p>to findout the device signatures.</p>
+<p>For example:</p>
+<p><code>ubus call hostapd.wlan0 get_clients</code></p>
+{% endblock %}

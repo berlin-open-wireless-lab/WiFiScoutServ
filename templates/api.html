@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}API{% endblock %}
+{% block content %}
+<h1>WiFi Signature Server</h1>
+
+
+<h2>Example how to use the API</h2>
+
+<ul>
+  <li>Device list: /api/v1/device?key= <code>API_KEY</code>
+  <li>Device details:
+    <ul>
+      <li>/api/v1/device?key= <code>API_KEY</code>&amp;signature=<code>SIGNATURE</code></li>
+      <li>/api/v1/device?key= <code>API_KEY</code>&amp;signature=<code>SIGNATURE</code>&amp;oui=<code>MAC_VENDOR</code></li>
+    </ul>
+  </li>
+</ul>
+{% endblock %}
