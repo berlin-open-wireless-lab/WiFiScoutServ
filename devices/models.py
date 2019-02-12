@@ -44,6 +44,7 @@ class Device(models.Model):
     signature_5 = models.ManyToManyField('Signature', related_name='%(class)s_signature_5', blank=True)
     mac_vendor = models.CharField(max_length=255)
     category = models.ForeignKey(Category, null=True, on_delete=models.PROTECT)
+    chipset = models.CharField(max_length=255, default='')
     comment = models.CharField(max_length=500, blank=True, default='')
     image = models.ImageField(upload_to=device_directory_path, blank=True, null=True, max_length=500)
     image_url = models.CharField(max_length=500, blank=True, default='')
