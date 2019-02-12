@@ -19,7 +19,7 @@ class SignatureAdmin(admin.ModelAdmin):
 @admin.register(Device)
 class DeviceAdmin(admin.ModelAdmin):
     filter_horizontal = ('signature_24','signature_5',)
-    fields = ('uuid', 'name', 'thumbnail', 'category', 'mac_vendor', 'comment', 'created_at', 'modified_at', 'image', 'image_url','signature_24','signature_5', 'chipset')
+    fields = ('uuid', 'name', 'thumbnail', 'category', 'mac_vendor', 'chipset', 'comment', 'created_at', 'modified_at', 'image', 'image_url','signature_24','signature_5')
     list_display = ('approved', 'thumbnail', 'name', 'mac_vendor', 'category', 'chipset', 'created_at', 'modified_at', 'comment')
     list_display_links = ('name',)
     list_filter = ('approved', 'category')
